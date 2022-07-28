@@ -6,5 +6,5 @@ export default defineConfig({
   splitting: true,
   dts: true,
   format: ["cjs", "esm", "iife"],
-  target: "es2017"
+  target: "es2015"
 })
