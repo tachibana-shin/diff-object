@@ -21,12 +21,16 @@ interface DiffNormalObject {
 }
 export type DiffObject<useSymbol extends boolean = true> =
   useSymbol extends true ? DiffSymbolObject : DiffNormalObject
-export type Diff<useSymbol extends boolean = true> = Record<
-  string,
-  useSymbol extends true
-    ? DiffSymbolObject | Diff<true>
-    : DiffObject | Diff<false>
->
+interface DiffNormal {
+  [name: string]: DiffObject | DiffNormal
+}
+interface DiffSymbol {
+  [name: string]: DiffSymbolObject | DiffSymbol
+}
+export type Diff<useSymbol extends boolean = true> = useSymbol extends true
+  ? DiffSymbol
+  : DiffNormal
+
 export interface Options<useSymbol extends boolean = true> {
   deep?: false
   symbol?: useSymbol
