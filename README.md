@@ -34,3 +34,19 @@ console.log(
    )
 )
 ```
+
+**Important!**
+
+If you use package result paste by PORT API please use `symbol: false` instead
+
+```ts
+import { diff } from '@tachibana-shin/diff-object';
+
+console.log(
+   diff(
+      { a: 1 },
+      { b: 2 },
+      { symbol: false }
+   )
+)
+```
