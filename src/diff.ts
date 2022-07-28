@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import isEqual from "lodash.isequal"
 
 export const KEY_ACTION = Symbol("action")
@@ -15,8 +16,11 @@ export interface Diff {
 export interface Options {
   deep?: false
 }
+export interface DiffReturn {
+  diffs: Diff
+  count: number
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isDiffObject(diffObj: any): diffObj is DiffObject {
   return KEY_ACTION in diffObj && KEY_VALUEA in diffObj && KEY_VALUEB in diffObj
 }
@@ -25,14 +29,12 @@ export function diff<A extends object, B extends object>(
   a: A,
   b: B,
   options?: Options
-): {
-  diffs: Diff
-  count: number
-} {
+): DiffReturn {
   const diffs: Diff = {}
 
   const keys = new Set([...Object.keys(a), ...Object.keys(b)])
 
+  // eslint-disable-next-line functional/no-let
   let countDiffs = 0
 
   for (const name of keys) {
@@ -69,12 +71,12 @@ export function diff<A extends object, B extends object>(
       typeof (b as unknown as any)[name] === "object" &&
       options?.deep !== false
     ) {
-      // eslint-disable-next-line functional/immutable-data
       const { diffs: diffsChild, count } = diff(
         (a as unknown as any)[name],
         (b as unknown as any)[name]
       )
 
+      // eslint-disable-next-line functional/immutable-data
       diffs[name] = diffsChild
       countDiffs += count
 
