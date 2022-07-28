@@ -1,6 +1,6 @@
 # diff-object
 
-a repository npm package
+A package get diff object.
 
 [https://tachibana-shin.github.io/diff-object](https://tachibana-shin.github.io/diff-object)
 
@@ -20,8 +20,17 @@ NPM / Yarn / Pnpm
 pnpm add diff-object
 ```
 
-CDN:
+## Usage
 
-```html
-<script src="https://unpkg.com/"></script>
+Fast, simple, and full diff.
+
+```ts
+import { diff } from '@tachibana-shin/diff-object';
+
+console.log(
+   diff(
+      { a: 1 },
+      { b: 2 }
+   )
+)
 ```
