@@ -49,9 +49,9 @@ export function diff<
   B extends object,
   useSymbol extends boolean = true
 >(a: A, b: B, options?: Options<useSymbol>): DiffReturn<useSymbol> {
-  const KeyAction = options?.symbol ? KEY_SYMBOL_ACTION : KEY_ACTION
-  const KeyValueA = options?.symbol ? KEY_SYMBOL_VALUEA : KEY_VALUEA
-  const KeyValueB = options?.symbol ? KEY_SYMBOL_VALUEB : KEY_VALUEB
+  const KeyAction = options?.symbol !== false ? KEY_SYMBOL_ACTION : KEY_ACTION
+  const KeyValueA = options?.symbol !== false ? KEY_SYMBOL_VALUEA : KEY_VALUEA
+  const KeyValueB = options?.symbol !== false ? KEY_SYMBOL_VALUEB : KEY_VALUEB
 
   const diffs: Diff = {}
 
