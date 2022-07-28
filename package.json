@@ -45,11 +45,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/tachibana-shin/object-diff.git"
+    "url": "git://github.com/tachibana-shin/diff-object.git"
   },
-  "homepage": "https://tachibana-shin.github.io/object-diff",
+  "homepage": "https://tachibana-shin.github.io/diff-object",
   "keywords": [
-    "object-diff",
+    "diff-object",
     "Tachibana Shin",
     "tachibana-shin"
   ],
