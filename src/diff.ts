@@ -40,11 +40,28 @@ export interface DiffReturn<useSymbol extends boolean = true> {
   count: number
 }
 
-export function isDiffObject(diffObj: any): diffObj is DiffObject {
+export function isDiffObject(
+  diffObj: any,
+  checkSymbol?: boolean
+): diffObj is DiffObject {
   return (
-    KEY_SYMBOL_ACTION in diffObj &&
-    KEY_SYMBOL_VALUEA in diffObj &&
-    KEY_SYMBOL_VALUEB in diffObj
+    typeof diffObj === "object" &&
+    diffObj !== null &&
+    (checkSymbol
+      ? KEY_SYMBOL_ACTION in diffObj &&
+        KEY_SYMBOL_VALUEA in diffObj &&
+        KEY_SYMBOL_VALUEB in diffObj
+      : KEY_ACTION in diffObj && KEY_VALUEA in diffObj && KEY_VALUEB in diffObj)
+  )
+}
+export function isKeyDiffObject(key: string | symbol) {
+  return (
+    (typeof key === "string" &&
+      (key === KEY_ACTION || key === KEY_VALUEA || key === KEY_VALUEB)) ||
+    (typeof key === "symbol" &&
+      (key === KEY_SYMBOL_ACTION ||
+        key === KEY_SYMBOL_VALUEA ||
+        key === KEY_SYMBOL_VALUEB))
   )
 }
 
